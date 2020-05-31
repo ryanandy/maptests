@@ -1,14 +1,7 @@
 os: Visual Studio 2019
-
 environment:
-    global:
-      # Remember to edit .travis.yml too
-      BUILD_COMMIT: 0.29.19
-
-    matrix:
-    - PYTHON: "C:\\Python38-x64"
-      PYTHON_VERSION: "3.8.x" # currently 3.8.0
-      PYTHON_ARCH: "64"
+  matrix:
+  - TOXENV: py37
 
 
 install:
