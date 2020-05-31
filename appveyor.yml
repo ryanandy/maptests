@@ -20,47 +20,45 @@ install:
   - cmd: echo "Using cmd"
 
   # Check that we have the expected version and architecture for Python
-  - python --version
-  - python -c "import struct; print(struct.calcsize('P') * 8)"
-
+  - python4 --version
   - python -m pip install --upgrade pip setuptools
   # Pin wheel to 0.26 to avoid Windows ABI tag for built wheel
   - pip install wheel  # ==0.26
 
-build_script:
-  # Build and install the wheel
-  - cd cython
-  - git fetch origin
-  - git checkout %BUILD_COMMIT%
-  # Remove Bazel file that interferes with distutils
-  - del BUILD
-  - python setup.py bdist_wheel
-  - ps: |
-      # Upload artifact to Appveyor immediately after build
-      ls dist -r | Foreach-Object {
-          appveyor PushArtifact $_.FullName
-      }
-  - pip install --pre --no-index -f .\dist cython
+# build_script:
+#   # Build and install the wheel
+#   - cd cython
+#   - git fetch origin
+#   - git checkout %BUILD_COMMIT%
+#   # Remove Bazel file that interferes with distutils
+#   - del BUILD
+#   - python setup.py bdist_wheel
+#   - ps: |
+#       # Upload artifact to Appveyor immediately after build
+#       ls dist -r | Foreach-Object {
+#           appveyor PushArtifact $_.FullName
+#       }
+#   - pip install --pre --no-index -f .\dist cython
 
-test_script:
-  # Run some tests
-  - ps: get-childitem Demos\*.pyx | foreach-object { cython $_ }
-  - set CFLAGS="/Od"
-  - "%WITH_ENV% %PYTHON%\\python.exe runtests.py -vv --no-cpp --no-code-style -j8"
+# test_script:
+#   # Run some tests
+#   - ps: get-childitem Demos\*.pyx | foreach-object { cython $_ }
+#   - set CFLAGS="/Od"
+#   - "%WITH_ENV% %PYTHON%\\python.exe runtests.py -vv --no-cpp --no-code-style -j8"
 
-after_test:
-  # If tests are successful, create binary packages for the project.
-  - dir dist
+# after_test:
+#   # If tests are successful, create binary packages for the project.
+#   - dir dist
 
-deploy:
-  release: $(BUILD_COMMIT)
-  description: 'Cython $(BUILD_COMMIT)'
-  provider: GitHub
-  auth_token:
-    secure: gIuGypw8TomOL2eG8qqZsICAoSZV0pQMK6BOO8HbQc6bPiKgTnf2kdrTKBvRCdCZ
-  artifact: dist/*.whl
-  draft: false
-  prerelease: false
-  #on:
-    #branch: release                 # release from this branch only
-    #APPVEYOR_REPO_TAG: true          # deploy on tag push only
+# deploy:
+#   release: $(BUILD_COMMIT)
+#   description: 'Cython $(BUILD_COMMIT)'
+#   provider: GitHub
+#   auth_token:
+#     secure: gIuGypw8TomOL2eG8qqZsICAoSZV0pQMK6BOO8HbQc6bPiKgTnf2kdrTKBvRCdCZ
+#   artifact: dist/*.whl
+#   draft: false
+#   prerelease: false
+#   #on:
+#     #branch: release                 # release from this branch only
+#     #APPVEYOR_REPO_TAG: true          # deploy on tag push only
