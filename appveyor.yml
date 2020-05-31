@@ -18,12 +18,18 @@ environment:
 
 install:
   - cmd: echo "Using cmd"
+  # Install new Python if necessary
+  - ps: .\multibuild\install_python.ps1
 
+  # Prepend newly installed Python to the PATH of this build (this cannot be
+  # done from inside the powershell script as it would require to restart
+  # the parent CMD process).
+  - SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%
   # Check that we have the expected version and architecture for Python
-  - python3 --version
-  - python3 -m pip install --upgrade pip setuptools
+  - python --version
+  - python -m pip install --upgrade pip setuptools
   # Pin wheel to 0.26 to avoid Windows ABI tag for built wheel
-  - python3 -m pip install wheel  # ==0.26
+  - python -m pip install wheel  # ==0.26
 
 # build_script:
 #   # Build and install the wheel
