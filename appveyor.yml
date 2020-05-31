@@ -13,7 +13,9 @@ build_script:
   - cd "C:\\Python38-x64"
   - python --version
   - python.exe -m pip install pipwin
-  - pipwin show info
+  - "C:\\Python38-x64\\Scripts\\pipwin.exe refresh"
+  - "C:\\Python38-x64\\Scripts\\pipwin.exe install pandas"
+  
 #   - ps: |
 #       # Upload artifact to Appveyor immediately after build
 #       ls dist -r | Foreach-Object {
