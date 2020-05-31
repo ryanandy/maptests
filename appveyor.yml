@@ -6,30 +6,14 @@ environment:
       BUILD_COMMIT: 0.29.19
 
     matrix:
-
-    - PYTHON: "C:\\Python38"
-      PYTHON_VERSION: "3.8.x" # currently 3.8.0
-      PYTHON_ARCH: "32"
-
     - PYTHON: "C:\\Python38-x64"
       PYTHON_VERSION: "3.8.x" # currently 3.8.0
       PYTHON_ARCH: "64"
 
 
 install:
-  - cmd: echo "Using cmd"
-  # Install new Python if necessary
-  - ps: .\multibuild\install_python.ps1
+  - pip --version
 
-  # Prepend newly installed Python to the PATH of this build (this cannot be
-  # done from inside the powershell script as it would require to restart
-  # the parent CMD process).
-  - SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%
-  # Check that we have the expected version and architecture for Python
-  - python --version
-  - python -m pip install --upgrade pip setuptools
-  # Pin wheel to 0.26 to avoid Windows ABI tag for built wheel
-  - python -m pip install wheel  # ==0.26
 
 # build_script:
 #   # Build and install the wheel
