@@ -10,11 +10,11 @@ image:
 
 build_script:
   # Build and install the wheel
-  - cd "C:\\Python38-x64"
+  - cd "C:\\Python36-x64"
   - python --version
   - python.exe -m pip install pipwin
-  - "C:\\Python38-x64\\Scripts\\pipwin.exe refresh"
-  - "C:\\Python38-x64\\Scripts\\pipwin.exe install pandas"
+  - "C:\\Python36-x64\\Scripts\\pipwin.exe refresh"
+  - "C:\\Python36-x64\\Scripts\\pipwin.exe install pandas"
   
 #   - ps: |
 #       # Upload artifact to Appveyor immediately after build
