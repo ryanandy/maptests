@@ -12,6 +12,8 @@ build_script:
   # Build and install the wheel
   - cd "C:\\Python38-x64"
   - python --version
+  - python.exe -m pip install pipwin
+  - pipwin show info
 #   - ps: |
 #       # Upload artifact to Appveyor immediately after build
 #       ls dist -r | Foreach-Object {
