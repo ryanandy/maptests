@@ -31,6 +31,5 @@ jobs:
     - name: Test package
       run: |
         pip install porder
-        pipwin install geopandas
         porder -h
         
