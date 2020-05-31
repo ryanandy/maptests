@@ -13,7 +13,6 @@ environment:
 
 install:
   # Check that we have the expected version and architecture for Python
-  - "%PYTHON%\\python --version"
   - "%PYTHON%\\python -m pip install pipwin"
   - "%PYTHON%\\Scripts\\pipwin.exe -h"
 
