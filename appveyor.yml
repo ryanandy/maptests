@@ -13,11 +13,9 @@ environment:
 
 install:
   # Check that we have the expected version and architecture for Python
-  - "python --version"
-  - "python -c \"import struct; print(struct.calcsize('P') * 8)\""
-
-  # Install the genreated wheel package to test it
-  - "pip install --pre --no-index --find-links dist/ scikit-image"
+  - "%PYTHON%\\python --version"
+  - "%PYTHON%\\python -m pip install pipwin"
+  - "%PYTHON%\\Scripts\\pipwin.exe -h"
 
 
 # build_script:
