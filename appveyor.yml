@@ -8,12 +8,13 @@ environment:
 
   matrix:
     - PYTHON: "C:\\Python38-x64"
+    - PYPATH: "C:\Users\appveyor\AppData\Roaming\Python\Python38\Scripts"
 
 install:
   # Check that we have the expected version and architecture for Python
   - "%PYTHON%\\python -m pip install pipwin --user"
-  - "%PYTHON%\\Scripts\\pipwin.exe refresh"
-  - "%PYTHON%\\Scripts\\pipwin.exe install numpy"
+  - "%PYPATH%\\Scripts\\pipwin.exe refresh"
+  - "%PYPATH%\\Scripts\\pipwin.exe install numpy"
 
 
 # build_script:
