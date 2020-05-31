@@ -14,7 +14,7 @@ build_script:
   - python --version
   - python.exe -m pip install pipwin
   - "C:\\Python36-x64\\Scripts\\pipwin.exe refresh"
-  - "C:\\Python36-x64\\Scripts\\pipwin.exe search pandas"
+  - "C:\\Python36-x64\\Scripts\\pipwin.exe download pandas"
   
 #   - ps: |
 #       # Upload artifact to Appveyor immediately after build
