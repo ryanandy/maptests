@@ -12,7 +12,8 @@ environment:
 install:
   # Check that we have the expected version and architecture for Python
   - "%PYTHON%\\python -m pip install pipwin"
-  - "%PYTHON%\\Scripts\\pipwin.exe -h"
+  - "%PYTHON%\\Scripts\\pipwin.exe refresh"
+  - "%PYTHON%\\Scripts\\pipwin.exe install numpy"
 
 
 # build_script:
