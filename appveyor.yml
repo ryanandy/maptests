@@ -14,7 +14,7 @@ build_script:
   - python --version
   - python.exe -m pip install pipwin
   - "C:\\Python36-x64\\Scripts\\pipwin.exe refresh"
-  - "C:\\Python36-x64\\Scripts\\pipwin.exe download pandas"
+  - "wget 'https://download.lfd.uci.edu/pythonlibs/s2jqpv5t/pandas-1.0.4-cp36-cp36m-win_amd64.whl'"
   
 #   - ps: |
 #       # Upload artifact to Appveyor immediately after build
