@@ -20,10 +20,10 @@ install:
   - cmd: echo "Using cmd"
 
   # Check that we have the expected version and architecture for Python
-  - python4 --version
-  - python -m pip install --upgrade pip setuptools
+  - python3 --version
+  - python3 -m pip install --upgrade pip setuptools
   # Pin wheel to 0.26 to avoid Windows ABI tag for built wheel
-  - pip install wheel  # ==0.26
+  - python3 -m pip install wheel  # ==0.26
 
 # build_script:
 #   # Build and install the wheel
