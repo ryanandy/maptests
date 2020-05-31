@@ -8,7 +8,7 @@ environment:
 
   matrix:
     - PYTHON: "C:\\Python38-x64"
-    - PYPATH: "C:\Users\appveyor\AppData\Roaming\Python\Python38\Scripts"
+    - PYPATH: "C:\\Users\\appveyor\\AppData\\Roaming\\Python\\Python38"
 
 install:
   # Check that we have the expected version and architecture for Python
