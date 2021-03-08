@@ -29,5 +29,5 @@ jobs:
           pip install poetry
       - name: execute py script # run the run.py to get the latest data
         run: |
-          python ee_data_stac.py
-          ls -l -a
+          export PYTHONPATH=src
+          python ./ee_data_stac.py
