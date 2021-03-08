@@ -29,8 +29,7 @@ jobs:
           pip install requests pendulum beautifulsoup4 lxml csv
           pip install poetry
       - name: execute py script # run the run.py to get the latest data
-        run: |
-          python ee_data_stac.py
+        run: python ee_data_stac.py
       - name: commit files
         run: |
           git add -A
