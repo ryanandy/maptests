@@ -9,8 +9,7 @@ import urllib
 from datetime import datetime
 from bs4 import BeautifulSoup
 
-os.chdir(os.path.dirname(os.path.realpath(__file__)))
-jpath=os.path.dirname(os.path.realpath(__file__))
+jpath='hello.csv'
 now = datetime.now()
 infile=os.path.join(jpath,'catalog.json')
 
@@ -74,9 +73,7 @@ def parseurl(url,outname):
         print(e)
 
 def ee_catalog():
-    if not os.path.exists(os.path.join(jpath,'release')):
-        os.makedirs(os.path.join(jpath,'release'))
-    outname=os.path.join(jpath,'release','eed_'+str(now.strftime('%Y-%m-%d'))+'.csv')
+    outname=os.path.join(jpath)
     if os.path.exists(infile):
         with open(outname,'w') as csvfile:
             writer=csv.DictWriter(csvfile,fieldnames=["id", "provider", "title", "start_date","end_date", "startyear","endyear","type","tags","asset_url","thumbnail_url"], delimiter=',',lineterminator='\n')
