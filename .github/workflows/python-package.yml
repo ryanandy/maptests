@@ -1,43 +1,11 @@
-Skip to content
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@ryanandy 
-Learn Git and GitHub without any code!
-Using the Hello World guide, you’ll start a branch, write comments, and open a pull request.
-
-
-ryanandy
-/
-covid-19-san-juan
-forked from canovasjm/covid-19-san-juan
-0
-01
-Code
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-covid-19-san-juan/.github/workflows/scraper-sj-gobierno.yml
-@canovasjm
-canovasjm create EMAIL_RECIPIENT secret
-Latest commit ac3cec9 on Dec 18, 2020
- History
- 1 contributor
-43 lines (35 sloc)  1.24 KB
-  
 name: scraper-san-juan-gobierno
 
 on:
+  push:
+    branches:
+      - master
   schedule:
-    - cron: '0 12 * * *' # runs at 12:00 UTC everyday
+    - cron:  '0 */15 * * *'
 
 jobs:
   build:
