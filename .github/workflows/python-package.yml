@@ -1,42 +1,73 @@
-name: py
-    
+Skip to content
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@ryanandy 
+Learn Git and GitHub without any code!
+Using the Hello World guide, you’ll start a branch, write comments, and open a pull request.
+
+
+ryanandy
+/
+covid-19-san-juan
+forked from canovasjm/covid-19-san-juan
+0
+01
+Code
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+Settings
+covid-19-san-juan/.github/workflows/scraper-sj-gobierno.yml
+@canovasjm
+canovasjm create EMAIL_RECIPIENT secret
+Latest commit ac3cec9 on Dec 18, 2020
+ History
+ 1 contributor
+43 lines (35 sloc)  1.24 KB
+  
+name: scraper-san-juan-gobierno
+
 on:
-  push:
-    branches:
-      - master
   schedule:
-    - cron:  '0 */15 * * *'
+    - cron: '0 12 * * *' # runs at 12:00 UTC everyday
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        python-version: [3.8]
-      fail-fast: false
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
+
+      - name: checkout repo content
+        uses: actions/checkout@v2 # checkout the repository content to github runner
+
       - name: setup python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.8 #install the python needed
-      - name: Install dependencies
+          python-version: '3.7.7' # install the python version needed
+          
+      - name: install python packages
         run: |
+          python -m pip install --upgrade pip
           python -m pip install --upgrade pip
           pip install -U pip setuptools
           pip install requests pendulum beautifulsoup4 lxml csv
-          pip install poetry
-      - name: execute py script # run the run.py to get the latest data
+      - name: execute py script # run sj-gobierno.py to get the latest data
         run: python ee_data_stac.py
+      - name: file_check
+        run: ls -l -a
       - name: commit files
         run: |
           git add -A
           git commit -m "update data" -a
-
       - name: push changes
         uses: ad-m/github-push-action@v0.6.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main  
+          branch: main
