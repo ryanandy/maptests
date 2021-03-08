@@ -32,3 +32,4 @@ jobs:
     - name: Test package
       run: |
         pip install glocaltokens
+        pip show glocaltokens
