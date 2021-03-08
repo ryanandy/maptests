@@ -92,8 +92,9 @@ jobs:
                         "asset_url":asset_url,
                         "thumbnail_url":thumbnail_url
                         }
-                        print([gee_id,gee_provider,gee_title,gee_start,gee_end,gee_start_year,gee_end_year,gee_type,', '.join(gee_tags),asset_url,thumbnail_url])
+                        #print([gee_id,gee_provider,gee_title,gee_start,gee_end,gee_start_year,gee_end_year,gee_type,', '.join(gee_tags),asset_url,thumbnail_url])
                         catalog.append(asset)
+                        print(catalog)
                 except Exception as e:
                     print(e)
             def ee_catalog():
