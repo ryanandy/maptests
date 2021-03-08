@@ -33,6 +33,7 @@ jobs:
             from bs4 import BeautifulSoup
             from datetime import datetime
             import time
+            import json
             import urllib
             now = datetime.now()
             catalog=[]
@@ -94,7 +95,7 @@ jobs:
                         }
                         #print([gee_id,gee_provider,gee_title,gee_start,gee_end,gee_start_year,gee_end_year,gee_type,', '.join(gee_tags),asset_url,thumbnail_url])
                         catalog.append(asset)
-                        print(catalog)
+                        #print(catalog)
                 except Exception as e:
                     print(e)
             def ee_catalog():
@@ -105,8 +106,11 @@ jobs:
                             parseurl(assets['href'])
                 except Exception as e:
                     print(e)
+            print(json.dumps(catalog, indent=2))
+            with open("ee_parsed_catalog.json", "w") as file:
+                json.dump(catalog, file, indent=4, sort_keys=True)
             ee_catalog()
-            print(catalog)
+            
       - name: execute py script # run sj-gobierno.py to get the latest data
         run: python ee_data_stac.py
       - name: file_check
