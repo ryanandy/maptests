@@ -2,9 +2,10 @@ name: py
     
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    branches:
+      - master
+  schedule:
+    - cron:  '0 */15 * * *'
 
 jobs:
   build:
@@ -15,8 +16,6 @@ jobs:
         python-version: [3.8]
       fail-fast: false
     steps:
-      - name: checkout repo content
-        uses: actions/checkout@v2 # checkout the repository content to github runner.
       - name: setup python
         uses: actions/setup-python@v2
         with:
@@ -29,5 +28,4 @@ jobs:
           pip install poetry
       - name: execute py script # run the run.py to get the latest data
         run: |
-          export PYTHONPATH=src
-          python ./ee_data_stac.py
+          python /ee_data_stac.py
