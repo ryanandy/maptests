@@ -30,12 +30,37 @@ jobs:
         with:
           script: |
             import requests
+            from datetime import datetime
+            import time
+            now = datetime.now()
+            def parseurl(url):
+                gparse= []
+                try:
+                    response=requests.get(url)
+                    if response.status_code==200:
+                        r=response.json()
+                        gee_id=r['id']
+                        gee_title=r['title']
+                        gee_type=r['gee:type']
+                        gee_start=r['extent']['temporal']['interval'][0][0].split('T')[0]
+                        if not r['extent']['temporal']['interval'][0][1]==None:
+                            gee_end=r['extent']['temporal']['interval'][0][1].split('T')[0]
+                        else:
+                            gee_end=now.strftime('%Y-%m-%d')
+                        gee_start_year=gee_start.split('-')[0]
+                        gee_end_year=gee_end.split('-')[0]
+                        gee_provider=r['providers'][0]['name']
+                        gee_tags=r['keywords']
+                        print([gee_id,gee_provider,gee_title,gee_start,gee_end,gee_start_year,gee_end_year,gee_type,', '.join(gee_tags)])
+                except Exception as e:
+                    print(e)
             def ee_catalog():
                 obj = requests.get('https://earthengine-stac.storage.googleapis.com/catalog/catalog.json').json()
                 try:
                     for assets in obj['links']:
                         if assets['rel']=='child':
                             print(assets['href'])
+                            parseurl(assets['href'])
                 except Exception as e:
                     print(e)
             ee_catalog()
