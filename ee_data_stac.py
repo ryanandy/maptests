@@ -73,23 +73,6 @@ def parseurl(url,outname):
     except Exception as e:
         print(e)
 
-if not os.path.exists(infile):
-    try:
-        cmd=('gsutil cp "gs://earthengine-stac/catalog/catalog.json" '+'"'+jpath+'"')
-        subprocess.call(cmd,shell=True)
-    except Exception as e:
-        print(e)
-if os.path.exists(infile):
-    time_check=tdiff()
-    if not time_check==True:
-        try:
-            cmd=('gsutil cp "gs://earthengine-stac/catalog/catalog.json" '+'"'+jpath+'"')
-            subprocess.call(cmd,shell=True)
-        except Exception as e:
-            print(e)
-    else:
-        print('Using existing catalog')
-
 def ee_catalog():
     if not os.path.exists(os.path.join(jpath,'release')):
         os.makedirs(os.path.join(jpath,'release'))
@@ -98,13 +81,11 @@ def ee_catalog():
         with open(outname,'w') as csvfile:
             writer=csv.DictWriter(csvfile,fieldnames=["id", "provider", "title", "start_date","end_date", "startyear","endyear","type","tags","asset_url","thumbnail_url"], delimiter=',',lineterminator='\n')
             writer.writeheader()
-        with open(infile, "r") as myfile:
-            data = myfile.read()
-            obj = json.loads(data)
-            try:
-                for assets in obj['links']:
-                    if assets['rel']=='child':
-                        parseurl(assets['href'],outname)
-            except Exception as e:
-                print(e)
+        obj = requests.get('https://earthengine-stac.storage.googleapis.com/catalog/catalog.json').json()
+        try:
+            for assets in obj['links']:
+                if assets['rel']=='child':
+                    parseurl(assets['href'],outname)
+        except Exception as e:
+            print(e)
 ee_catalog()
