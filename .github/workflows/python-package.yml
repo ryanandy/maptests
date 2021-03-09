@@ -112,12 +112,14 @@ jobs:
       - name: file_check
         run: ls -l -a
       - name: commit files
+        continue-on-error: true
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add -A
           git commit -m "update data" -a
       - name: push changes
+        continue-on-error: true
         uses: ad-m/github-push-action@v0.6.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
