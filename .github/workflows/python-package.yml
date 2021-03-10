@@ -1,5 +1,8 @@
 name: gee_catalog
 on:
+  push:
+    branches:
+      - master
   schedule:
     - cron:  '0 1 * * *'
 
