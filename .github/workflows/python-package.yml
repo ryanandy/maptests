@@ -1,7 +1,7 @@
 name: gee_catalog
 on:
   schedule:
-    - cron:  '18 0 * * *'
+    - cron:  '0 1 * * *'
 
 
 jobs:
